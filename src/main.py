@@ -2,28 +2,24 @@ from typing import Union
 
 from fastapi import FastAPI, Depends
 from pydantic import BaseModel
-import asyncpg
-import os
 from dotenv import load_dotenv
-# from src.routes.user_router import router as user_router
-from api.producto import producto
+from api.producto import router_producto
+from api.user import router_user
 load_dotenv()
 
 app = FastAPI()
 
-# app.include_router(user_router)
+app.include_router(router_producto.producto, prefix="/api")
+app.include_router(router_user.user, prefix="/user")
 
-# app.include_router(producto_router.producto)
-app.include_router(producto.producto, prefix="/api")
+# DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:Rolando@localhost:5432/empresa")
 
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:Rolando@localhost:5432/empresa")
-
-async def get_db():
-    conn = await asyncpg.connect(DATABASE_URL)
-    try:
-        yield conn
-    finally:
-        await conn.close()
+# async def get_db():
+#     conn = await asyncpg.connect(DATABASE_URL)
+#     try:
+#         yield conn
+#     finally:
+#         await conn.close()
 
 
 

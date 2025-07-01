@@ -2,7 +2,7 @@ import asyncpg
 import os
 
 
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:Rolando@localhost:5432/empresa")
+DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:Rolando@localhost:5432/universidad")
 
 async def get_db():
     conn = await asyncpg.connect(DATABASE_URL)

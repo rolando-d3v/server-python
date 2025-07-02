@@ -1,20 +1,32 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException, status
 from config.db import get_db
-
+from uuid import uuid4
 
 producto = APIRouter()
 
+#? CREATE ONE REGISTRO
+#? ****************************************************************************************/
+@producto.get("/get-one/{id}")
+def get_Id_User(id: int):
+    uuid = uuid4()
+    return {"msj": "successfully", "pro": id, "uuid": uuid}
 
-# ? CREATE ONE REGISTRO
-# ? ****************************************************************************************/
-@producto.get("/producto")
-def get_Id_User():
-    return {"msj": "successfully", "pro": 4555}
 
 
-@producto.get("/productos")
+
+
+#? OBTENER  PRODUCTOS
+#? ****************************************************************************************/
+@producto.get("/get-all")
 async def get_users(db=Depends(get_db)):
-    # print(os.getenv("DATABASE_URL_X"))
     rows = await db.fetch(' SELECT name, email FROM "User" ')
+
+    # si no existe los usuarios
+    if not rows:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="No se encontraron usuarios"
+        )
+        
     users = [{"name": row["name"], "email": row["email"]} for row in rows]
     return users

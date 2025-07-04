@@ -19,7 +19,7 @@ def get_Id_User(id: int):
 #? ****************************************************************************************/
 @producto.get("/get-all")
 async def get_users(db=Depends(get_db)):
-    rows = await db.fetch(' SELECT name, email FROM "User" ')
+    rows = await db.fetch(' SELECT name, apellido FROM "user" ')
 
     # si no existe los usuarios
     if not rows:
@@ -28,5 +28,5 @@ async def get_users(db=Depends(get_db)):
             detail="No se encontraron usuarios"
         )
         
-    users = [{"name": row["name"], "email": row["email"]} for row in rows]
+    users = [{"name": row["name"], "apellido": row["apellido"]} for row in rows]
     return users

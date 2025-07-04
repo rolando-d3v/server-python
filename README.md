@@ -1,5 +1,11 @@
 # Fastapi - asyncpg
 
+
+source venv/Scripts/activate //entrar y activar virtual en gitbash
+
+
+deactivate //salir de entorno virtual
+
 python -m venv venv
 
 pip install "fastapi[standard]"

@@ -37,6 +37,10 @@ app.include_router(router_user.user, prefix="/user")
 
 
 
+
+
+
+
 # ejemplo de auth middleware
 
 # from fastapi import Request, HTTPException, status, Depends

@@ -2,8 +2,8 @@ from fastapi import FastAPI
 from dotenv import load_dotenv
 import os
 
-from api.producto import router_producto
-from api.user import router_user
+from modules.producto import router_producto
+from modules.user import router_user
 from config.db import verificar_base_datos
 load_dotenv()
 
